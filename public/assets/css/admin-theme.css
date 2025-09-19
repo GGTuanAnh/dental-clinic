@@ -1,0 +1,39 @@
+/* Admin Theme (Dark + Light) extracted from inline layout */
+body{background:#0f172a;color:#f1f5f9;font-family:Inter,system-ui,sans-serif;}
+.admin-shell{display:flex;min-height:100vh;}
+.admin-sidebar{width:250px;background:#1e293b;border-right:1px solid #334155;display:flex;flex-direction:column;}
+.admin-sidebar .brand{padding:1rem 1.25rem;font-weight:700;font-size:1.05rem;color:#fff;letter-spacing:.5px;border-bottom:1px solid #334155;}
+.admin-nav a{display:flex;align-items:center;gap:.65rem;padding:.7rem 1.1rem;color:#cbd5e1;text-decoration:none;font-size:.9rem;font-weight:500;border-left:3px solid transparent;transition:.18s;background:transparent;}
+.admin-nav a:hover{color:#fff;background:#334155aa;}
+.admin-nav a.active{background:#1d4ed8;color:#fff;border-left-color:#93c5fd;}
+.admin-content{flex:1;display:flex;flex-direction:column;min-width:0;}
+.admin-topbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;background:var(--topbar-bg,#0f172a);border-bottom:1px solid #1e293b;}
+.breadcrumb{--bs-breadcrumb-divider:'›';}
+.card{background:#1e293b;border:1px solid #334155;}
+.table{--bs-table-color:#f1f5f9;--bs-table-bg:transparent;}
+.table thead{background:#334155;}
+.form-control, .form-select, .form-control:focus, .form-select:focus{background:#0f172a;color:#f1f5f9;border-color:#334155;}
+.badge{font-weight:500;}
+.text-muted{color:#94a3b8!important;}
+a{color:#60a5fa;}a:hover{color:#93c5fd;}
+.footer-admin{padding:1rem 1.25rem;font-size:.75rem;color:#64748b;border-top:1px solid #1e293b;}
+@media (max-width: 992px){
+  .admin-sidebar{position:fixed;z-index:1000;inset:0 auto 0 0;transform:translateX(-100%);transition:.25s;}
+  .admin-sidebar.open{transform:translateX(0);}
+  .admin-content{margin-left:0;}
+  .sidebar-toggle{display:inline-flex;}
+}
+.sidebar-toggle{display:none;align-items:center;gap:.5rem;border:1px solid #334155;background:#1e293b;color:#cbd5e1;padding:.4rem .8rem;border-radius:.5rem;}
+/* Light theme overrides */
+[data-theme-mode='light'] body{background:#f1f5f9;color:#0f172a;}
+[data-theme-mode='light'] .admin-sidebar{background:#ffffff;border-right-color:#e2e8f0;}
+[data-theme-mode='light'] .admin-sidebar .brand{color:#0f172a;border-bottom-color:#e2e8f0;}
+[data-theme-mode='light'] .admin-nav a{color:#334155;}
+[data-theme-mode='light'] .admin-nav a:hover{background:#e2e8f0;color:#0f172a;}
+[data-theme-mode='light'] .admin-nav a.active{background:#1d4ed8;color:#fff;border-left-color:#93c5fd;}
+[data-theme-mode='light'] .card{background:#ffffff;border-color:#e2e8f0;}
+[data-theme-mode='light'] .table thead{background:#e2e8f0;}
+[data-theme-mode='light'] .form-control,[data-theme-mode='light'] .form-select{background:#ffffff;color:#0f172a;border-color:#cbd5e1;}
+[data-theme-mode='light'] .footer-admin{color:#64748b;border-top-color:#e2e8f0;}
+.theme-toggle-btn{border:1px solid #334155;background:#1e293b;color:#cbd5e1;border-radius:.5rem;padding:.4rem .65rem;display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;}
+[data-theme-mode='light'] .theme-toggle-btn{background:#fff;color:#334155;border-color:#cbd5e1;}

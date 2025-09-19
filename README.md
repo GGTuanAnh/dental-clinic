@@ -1,61 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🦷 Dental Clinic Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive dental clinic management system built with Laravel 12.x, featuring patient management, appointment scheduling, and advanced analytics dashboard for doctors and administrators.
 
-## About Laravel
+## ✨ Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🌐 Public Website
+- **Landing Pages**: Home, Services, About, Contact, Gallery, Pricing, Testimonials, FAQ
+- **Appointment Booking**: Online booking form with honeypot protection and rate limiting
+- **Responsive Design**: Mobile-first design with Bootstrap 5
+- **Media Management**: Dynamic image transformation with caching
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 👨‍⚕️ Doctor Dashboard
+- **Advanced Analytics**: Revenue tracking, completion rates, lead times
+- **Interactive Charts**: Line, doughnut, and bar charts with Chart.js
+- **Time Range Filtering**: 7, 30, 90-day views with real-time data
+- **Revenue Alerts**: Automatic alerts for significant revenue drops
+- **Appointment Management**: View and manage doctor-specific appointments
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔐 Admin Panel
+- **Role-Based Access**: Admin, Doctor, Staff roles with granular permissions
+- **Patient Management**: Complete patient records with notes and prescriptions
+- **Appointment Tracking**: Status management and administrative oversight
+- **Image Gallery**: Centralized media management for services and doctors
+- **Audit Logging**: Comprehensive activity tracking for security and compliance
+- **Theme Support**: Dark/Light mode with seamless switching
 
-## Learning Laravel
+## 🛠️ Technical Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Backend**: Laravel 12.x with PHP 8.2+
+- **Database**: MySQL 8.x with optimized schema
+- **Frontend**: Bootstrap 5 + Chart.js 4.x
+- **Caching**: Redis-compatible caching with 60s TTL for dashboards
+- **Authentication**: Session-based auth with policy-driven authorization
+- **Security**: CSRF protection, rate limiting, audit logging
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 📊 Advanced Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Dashboard Metrics
+- **Completion Rate**: Ratio of completed to confirmed appointments
+- **Average Revenue per Appointment**: Financial performance tracking
+- **Lead Time Analysis**: Time between booking and appointment
+- **Revenue Drop Alerts**: Automatic notifications for performance issues
 
-## Laravel Sponsors
+### Data Management
+- **Migration-Driven Schema**: Version-controlled database changes
+- **Seeded Data**: Admin and doctor accounts with sample data
+- **Policy-Based Authorization**: Fine-grained access control
+- **Audit Trail**: Complete activity logging with user attribution
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Installation
 
-### Premium Partners
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/GGTuanAnh/dental-clinic.git
+   cd dental-clinic
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
 
-## Contributing
+3. **Environment setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Database setup**
+   ```bash
+   php artisan migrate
+   php artisan db:seed --class=AdminUserSeeder
+   php artisan db:seed --class=DoctorUserSeeder
+   ```
 
-## Code of Conduct
+5. **Start development server**
+   ```bash
+   php artisan serve
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔑 Default Credentials
 
-## Security Vulnerabilities
+- **Admin**: `admin@example.com` / `password123`
+- **Doctor**: `doctor@example.com` / `password123`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📋 Todo Roadmap
 
-## License
+### Upcoming Features
+- [ ] Drill-down appointment modals
+- [ ] CSV/PDF export functionality  
+- [ ] Chart image downloads
+- [ ] Real-time polling updates
+- [ ] Enhanced RBAC for patients
+- [ ] Stacked status charts
+- [ ] Skeleton loading animations
+- [ ] Dark mode chart palettes
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Advanced Development
+- [ ] Cache invalidation strategies
+- [ ] WebSocket integration
+- [ ] Mobile app API
+- [ ] Multi-clinic support
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+Built with ❤️ using Laravel 12.x | © 2025 Dental Clinic Management System

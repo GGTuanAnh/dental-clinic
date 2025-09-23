@@ -38,6 +38,7 @@ class BookingController extends Controller
             'patient_id' => $patient->id,
             'service_id' => $validated['service_id'],
             'appointment_at' => $validated['appointment_at'],
+            'status' => 'pending',
             'note' => $validated['note'] ?? null,
         ]);
 

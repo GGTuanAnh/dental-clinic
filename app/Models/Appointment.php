@@ -16,6 +16,10 @@ class Appointment extends Model
         'follow_up_at' => 'date',
     ];
 
+    protected $attributes = [
+        'status' => 'pending',
+    ];
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);

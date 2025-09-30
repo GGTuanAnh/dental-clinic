@@ -8,13 +8,15 @@ class DoctorsSeeder extends Seeder
 {
     public function run(): void
     {
-        $docs = [
-            ['name'=>'BS. Nguyễn An','specialty'=>'Chỉnh nha','bio'=>'10 năm kinh nghiệm chỉnh nha.'],
-            ['name'=>'BS. Trần Việt','specialty'=>'Phục hình','bio'=>'Chuyên phục hình răng sứ thẩm mỹ.'],
-            ['name'=>'BS. Lê Minh','specialty'=>'Nội nha','bio'=>'Điều trị tủy nhẹ nhàng, hiệu quả.'],
-        ];
-        foreach ($docs as $d) {
-            Doctor::firstOrCreate(['name'=>$d['name']], $d);
-        }
+        // Single doctor/admin for the clinic using env config
+        Doctor::firstOrCreate(
+            ['name' => env('DOCTOR_NAME', 'BS. Nguyễn Văn Việt')],
+            [
+                'name' => env('DOCTOR_NAME', 'BS. Nguyễn Văn Việt'),
+                'specialty' => 'Bác sĩ nha khoa tổng quát',
+                'bio' => 'Bác sĩ nha khoa với 10 năm kinh nghiệm, chuyên về điều trị và phục hồi răng.',
+                'user_id' => 1, // Link to admin user
+            ]
+        );
     }
 }

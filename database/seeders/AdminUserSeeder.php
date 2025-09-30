@@ -10,13 +10,13 @@ class AdminUserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Avoid duplicates if seeder run multiple times
+        // Single admin/doctor user for the clinic using env config
         User::firstOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => env('DOCTOR_EMAIL', 'bsviet@clinic.com')],
             [
-                'name' => 'Default Admin',
-                'password' => Hash::make('ChangeMe123!'),
-                'role' => 'admin',
+                'name' => env('DOCTOR_NAME', 'BS. Nguyễn Văn Việt'),
+                'password' => Hash::make(env('DOCTOR_PASSWORD', 'password')),
+                'role' => 'admin', // Admin role includes doctor privileges
             ]
         );
     }

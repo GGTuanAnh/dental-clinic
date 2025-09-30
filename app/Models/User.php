@@ -49,7 +49,10 @@ class User extends Authenticatable
 
     // ---- Role helpers --------------------------------------------------
     public function isAdmin(): bool { return $this->role === 'admin'; }
-    public function isDoctor(): bool { return $this->role === 'doctor'; }
+    public function isDoctor(): bool { 
+        // Admin role includes doctor privileges since we have one person doing both
+        return $this->role === 'doctor' || $this->role === 'admin'; 
+    }
     public function isStaff(): bool { return $this->role === 'staff'; }
 
     // Relation: one user (role doctor) may map to a doctor profile

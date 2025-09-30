@@ -37,6 +37,7 @@ class BookingController extends Controller
         $appt = Appointment::create([
             'patient_id' => $patient->id,
             'service_id' => $validated['service_id'],
+            'doctor_id' => 1, // Luôn gán cho BS. Nguyễn Văn Việt (doctor duy nhất)
             'appointment_at' => $validated['appointment_at'],
             'note' => $validated['note'] ?? null,
         ]);

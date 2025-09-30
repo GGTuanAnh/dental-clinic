@@ -14,10 +14,12 @@ class DashboardController extends Controller
     public function index()
     {
         $today = now()->startOfDay();
-    $user = request()->user();
+        $user = request()->user();
 
-        if(request()->wantsJson() && request()->boolean('doctorDashboard') && $user && $user->isDoctor()){
-            $doctorId = $user->doctor?->id;
+        // Since we have only one doctor/admin (BS. Nguyễn Văn Việt), always show unified dashboard
+        $doctorId = 1; // Our single doctor ID
+        
+        if(request()->wantsJson() && request()->boolean('doctorDashboard')){
             $range = (int) request()->integer('range', 7);
             if(!in_array($range,[7,30,90])) $range = 7;
             // Bump cache version when payload structure changes
@@ -79,27 +81,20 @@ class DashboardController extends Controller
             });
             return response()->json($payload);
         }
-        if(request()->wantsJson() && request()->boolean('chart')){
-            $labels = [];
-            $counts = [];
-            for($i=6;$i>=0;$i--){
-                $d = now()->subDays($i)->startOfDay();
-                $labels[] = $d->format('d/m');
-                $counts[] = Appointment::whereBetween('created_at', [$d, $d->copy()->endOfDay()])->count();
-            }
-            return response()->json(['labels'=>$labels,'counts'=>$counts]);
-        }
+        
+        // General stats for admin overview
         $stats = [
             'appointments_today' => Appointment::whereDate('created_at', $today)->count(),
             'appointments_pending' => Appointment::where('status','pending')->count(),
             'patients_total' => Patient::count(),
             'doctors_total' => Doctor::count(),
             'services_total' => Service::count(),
-            // Placeholder revenue (if there is a fee column later)
+            // Show unified doctor stats
+            'doctor_name' => 'BS. Nguyễn Văn Việt',
+            'appointments_assigned' => Appointment::where('doctor_id', 1)->count(),
         ];
-        if($user && $user->isDoctor()){
-            return view('admin.dashboard_doctor');
-        }
+        
+        // Always show unified admin/doctor dashboard since we have only one person
         return view('admin.dashboard', compact('stats'));
     }
 }

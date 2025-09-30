@@ -42,4 +42,3 @@ php artisan migrate:fresh --seed
 - **Analytics Dashboard** - Real-time clinic metrics and insights
 - **Responsive Design** - Works on desktop and mobile devices
 - **Optimized Database** - Clean schema with only essential tables (10 tables)
-

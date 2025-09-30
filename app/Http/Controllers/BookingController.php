@@ -39,6 +39,7 @@ class BookingController extends Controller
             'service_id' => $validated['service_id'],
             'doctor_id' => 1, // Luôn gán cho BS. Nguyễn Văn Việt (doctor duy nhất)
             'appointment_at' => $validated['appointment_at'],
+            'status' => 'pending',
             'note' => $validated['note'] ?? null,
         ]);
 

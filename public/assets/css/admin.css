@@ -1,0 +1,8 @@
+/* Admin theme overrides */
+:root[data-theme='admin'] {
+  --admin-accent:#1d4ed8;
+}
+.badge.bg-success{background:#16a34a!important}
+.badge.bg-warning{background:#facc15!important;color:#1e293b!important}
+.badge.bg-danger{background:#dc2626!important}
+.table tbody tr:hover td{background:#0f172a}

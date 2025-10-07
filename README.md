@@ -34,6 +34,19 @@ DOCTOR_PASSWORD=password
 php artisan migrate:fresh --seed
 ```
 
+### Aiven Cloud Integration
+
+Check Aiven service status:
+```bash
+php artisan aiven:status
+```
+
+Configure Aiven API in `.env`:
+```bash
+AIVEN_API_TOKEN=your-api-token
+AIVEN_PROJECT_NAME=dentalclinic
+```
+
 ## 🔧 Features
 
 - **Single Doctor Workflow** - Unified admin/doctor dashboard

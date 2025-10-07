@@ -54,7 +54,12 @@
 
 <div class="card filter-card mb-4">
   <div class="card-body">
-    <form method="get" class="row g-3 align-items-end">
+    <form method="get" 
+          hx-get="{{ route('admin.appointments.index') }}"
+          hx-target="#adminMainContent"
+          hx-push-url="true"
+          class="row g-3 align-items-end">
+      <input type="hidden" name="partial" value="1">
       <div class="col-md-3">
         <label class="form-label">Tìm kiếm</label>
         <input type="text" name="q" class="form-control" value="{{ request('q') }}" placeholder="Tên bệnh nhân hoặc số điện thoại">
@@ -96,7 +101,12 @@
       </div>
       <div class="col-md-12 d-flex justify-content-end gap-2">
         @if($hasFilters)
-          <a href="{{ route('admin.appointments.index') }}" class="btn btn-ghost"><i class="bi bi-x-circle"></i><span class="d-none d-sm-inline ms-1">Bỏ lọc</span></a>
+          <a href="{{ route('admin.appointments.index') }}" 
+             hx-get="{{ route('admin.appointments.index') }}?partial=1"
+             hx-target="#adminMainContent"
+             hx-push-url="{{ route('admin.appointments.index') }}"
+             hx-swap="innerHTML transition:true"
+             class="btn btn-ghost"><i class="bi bi-x-circle"></i><span class="d-none d-sm-inline ms-1">Bỏ lọc</span></a>
         @endif
         <button class="btn btn-primary px-4"><i class="bi bi-funnel me-1"></i>Lọc kết quả</button>
       </div>

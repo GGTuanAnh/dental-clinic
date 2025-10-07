@@ -1,13 +1,12 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate; 
 use App\Models\Doctor;
 use App\Models\Service;
 use App\Models\Banner;
+use Illuminate\Support\Facades\Gate;
 
-class ImageAdminController extends Controller
+class ImageAdminController extends BaseAdminController
 {
     public function index()
     {
@@ -15,6 +14,6 @@ class ImageAdminController extends Controller
         $doctors = Doctor::orderBy('id','desc')->get();
         $services = Service::orderBy('id','desc')->get();
         $banners = Banner::orderBy('id','desc')->get();
-        return view('admin.images_all', compact('doctors','services','banners'));
+        return $this->renderView('admin.images_all', compact('doctors','services','banners'), 'Quản lý hình ảnh');
     }
 }

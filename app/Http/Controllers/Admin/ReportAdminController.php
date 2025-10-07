@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseAdminController;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class ReportAdminController extends Controller
+class ReportAdminController extends BaseAdminController
 {
     public function index(Request $request)
     {
@@ -43,7 +43,7 @@ class ReportAdminController extends Controller
             return $this->exportCsv($from, $to);
         }
 
-        return view('admin.reports.index', compact('revenue','completedCount','appointmentsCount','breakdown','from','to'));
+    return $this->renderView('admin.reports.index', compact('revenue','completedCount','appointmentsCount','breakdown','from','to'), 'Báo cáo');
     }
 
     protected function exportCsv(?string $from, ?string $to): StreamedResponse

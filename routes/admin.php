@@ -42,7 +42,7 @@ Route::prefix($adminPrefix)
         // Patients
         Route::get('/patients', [PatientAdminController::class, 'index'])->name('patients.index');
         Route::get('/patients/{id}', [PatientAdminController::class, 'show'])->name('patients.show');
-        Route::post('/patients/{id}/notes', [PatientAdminController::class, 'addNote'])->name('patients.addNote');
+        // addNote route removed as PatientNote model doesn't exist
 
         // Reports
     Route::get('/reports', [ReportAdminController::class, 'index'])->middleware('can:view-reports')->name('reports.index');

@@ -11,8 +11,18 @@
   <div class="d-flex align-items-center justify-content-between mb-4">
     <h1 class="h4 mb-0">Quản lý hình ảnh</h1>
     <div class="d-flex gap-2">
-      <a href="{{ route('admin.appointments.index') }}" class="btn btn-outline-secondary"><i class="bi bi-calendar"></i> Lịch hẹn</a>
-      <a href="{{ route('admin.patients.index') }}" class="btn btn-outline-secondary"><i class="bi bi-people"></i> Bệnh nhân</a>
+      <a href="{{ route('admin.appointments.index') }}" 
+         hx-get="{{ route('admin.appointments.index') }}?partial=1"
+         hx-target="#adminMainContent"
+         hx-push-url="{{ route('admin.appointments.index') }}"
+         hx-swap="innerHTML transition:true"
+         class="btn btn-outline-secondary"><i class="bi bi-calendar"></i> Lịch hẹn</a>
+      <a href="{{ route('admin.patients.index') }}" 
+         hx-get="{{ route('admin.patients.index') }}?partial=1"
+         hx-target="#adminMainContent"
+         hx-push-url="{{ route('admin.patients.index') }}"
+         hx-swap="innerHTML transition:true"
+         class="btn btn-outline-secondary"><i class="bi bi-people"></i> Bệnh nhân</a>
     </div>
   </div>
 

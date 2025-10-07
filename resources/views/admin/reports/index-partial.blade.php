@@ -1,12 +1,4 @@
-@extends('layouts.admin')
-@section('page-title','Báo cáo')
-@section('breadcrumbs')
-  <x-breadcrumbs :items="[
-    ['label'=>'Dashboard','url'=>route('admin.home'),'icon'=>'speedometer2'],
-    ['label'=>'Báo cáo']
-  ]" />
-@endsection
-@section('content')
+<div data-page-title="Báo cáo">
 <div class="container-fluid px-0">
   <div class="d-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0">Báo cáo</h1>
@@ -99,7 +91,9 @@
                 <td class="text-end">{{ number_format($b->sum,0,',','.') }} đ</td>
               </tr>
             @empty
-              <tr><td colspan="3" class="text-center text-muted py-4">Không có dữ liệu</td></tr>
+              <tr>
+                <td colspan="3" class="text-center text-muted">Chưa có dữ liệu</td>
+              </tr>
             @endforelse
           </tbody>
         </table>
@@ -107,4 +101,4 @@
     </div>
   </div>
 </div>
-@endsection
+</div>

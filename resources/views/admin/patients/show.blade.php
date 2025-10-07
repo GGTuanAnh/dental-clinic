@@ -15,8 +15,18 @@
       <div class="text-muted">{{ $patient->name }} · {{ $patient->phone }}</div>
     </div>
     <div class="d-flex gap-2">
-  <a href="{{ route('admin.patients.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Danh sách</a>
-  <a href="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}" class="btn btn-primary"><i class="bi bi-calendar"></i> Lịch hẹn</a>
+  <a href="{{ route('admin.patients.index') }}" 
+     hx-get="{{ route('admin.patients.index') }}?partial=1"
+     hx-target="#adminMainContent"
+     hx-push-url="{{ route('admin.patients.index') }}"
+     hx-swap="innerHTML transition:true"
+     class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Danh sách</a>
+  <a href="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}" 
+     hx-get="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}?partial=1"
+     hx-target="#adminMainContent"
+     hx-push-url="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}"
+     hx-swap="innerHTML transition:true"
+     class="btn btn-primary"><i class="bi bi-calendar"></i> Lịch hẹn</a>
     </div>
   </div>
 
@@ -41,31 +51,8 @@
     </div>
 
     <div class="col-lg-8">
-      <div class="card shadow-sm mb-3">
-        <div class="card-body">
-          <h5 class="card-title d-flex align-items-center justify-content-between">
-            <span>Ghi chú</span>
-          </h5>
-          <form method="post" action="{{ route('admin.patients.addNote', $patient->id) }}" class="mb-3">
-            @csrf
-            <div class="input-group">
-              <textarea name="note" class="form-control" rows="2" placeholder="Thêm ghi chú cho bệnh nhân"></textarea>
-              <button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Thêm</button>
-            </div>
-          </form>
-          <ul class="list-group list-group-flush">
-            @forelse($patient->notes as $n)
-              <li class="list-group-item">
-                <div class="small text-muted">#{{ $n->id }} · {{ $n->created_at }}</div>
-                <div>{{ $n->note }}</div>
-              </li>
-            @empty
-              <li class="list-group-item text-muted">Chưa có ghi chú</li>
-            @endforelse
-          </ul>
-        </div>
-      </div>
-
+      <!-- Notes section removed as PatientNote model doesn't exist -->
+      
       <div class="card shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Lịch sử khám</h5>

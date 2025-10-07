@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\Doctor;
@@ -9,7 +8,7 @@ use App\Models\Service;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
-class DashboardController extends Controller
+class DashboardController extends BaseAdminController
 {
     public function index()
     {
@@ -24,7 +23,7 @@ class DashboardController extends Controller
             if(!in_array($range,[7,30,90])) $range = 7;
             // Bump cache version when payload structure changes
             $cacheKey = "doctor_dash:v2:{$doctorId}:{$range}";
-            $payload = Cache::remember($cacheKey, 60, function() use ($doctorId,$range,$today){
+            $payload = Cache::remember($cacheKey, 300, function() use ($doctorId,$range,$today){
                 $metrics = [
                     'today' => Appointment::whereDate('appointment_at',$today)->where('doctor_id',$doctorId)->count(),
                     'confirmed' => Appointment::where('status','confirmed')->where('doctor_id',$doctorId)->count(),
@@ -82,19 +81,31 @@ class DashboardController extends Controller
             return response()->json($payload);
         }
         
-        // General stats for admin overview
-        $stats = [
-            'appointments_today' => Appointment::whereDate('created_at', $today)->count(),
-            'appointments_pending' => Appointment::where('status','pending')->count(),
-            'patients_total' => Patient::count(),
-            'doctors_total' => Doctor::count(),
-            'services_total' => Service::count(),
-            // Show unified doctor stats
-            'doctor_name' => 'BS. Nguyễn Văn Việt',
-            'appointments_assigned' => Appointment::where('doctor_id', 1)->count(),
-        ];
+        // General stats for admin overview - optimized with cache
+        $stats = Cache::remember('dashboard_stats', 180, function() use ($today) {
+            return [
+                'appointments_today' => Appointment::whereDate('appointment_at', $today)->count(),
+                'appointments_pending' => Appointment::where('status','pending')->count(),
+                'appointments_completed' => Appointment::where('status','completed')->count(),
+                'appointments_total' => Appointment::count(),
+                'patients_total' => Patient::count(),
+                'new_patients_this_month' => Patient::whereMonth('created_at', now()->month)->count(),
+                'doctors_total' => Doctor::count(),
+                'services_total' => Service::count(),
+                'total_revenue' => Appointment::where('status','completed')->sum('total_amount'),
+                // Show unified doctor stats
+                'doctor_name' => 'BS. Nguyễn Văn Việt',
+                'appointments_assigned' => Appointment::where('doctor_id', 1)->count(),
+            ];
+        });
         
-        // Always show unified admin/doctor dashboard since we have only one person
-        return view('admin.dashboard', compact('stats'));
+        // Get recent appointments for activity feed
+        $recentAppointments = Appointment::with(['patient', 'service'])
+            ->whereDate('appointment_at', '>=', now()->subDays(7))
+            ->orderByDesc('appointment_at')
+            ->limit(10)
+            ->get();
+        
+        return $this->renderView('admin.dashboard', compact('stats', 'recentAppointments'), 'Dashboard');
     }
 }

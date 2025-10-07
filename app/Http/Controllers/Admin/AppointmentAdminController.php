@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
@@ -9,7 +8,7 @@ use App\Models\Doctor;
 use App\Models\Service;
 use Illuminate\Support\Carbon;
 
-class AppointmentAdminController extends Controller
+class AppointmentAdminController extends BaseAdminController
 {
 	use AuthorizesRequests;
 	public function index(Request $request)
@@ -55,7 +54,7 @@ class AppointmentAdminController extends Controller
 		$doctors = $user->isDoctor() ? collect([]) : Doctor::orderBy('name')->get();
 		$services = Service::orderBy('name')->get();
 
-		return view('admin.appointments.index', compact('appointments','doctors','services'));
+		return $this->renderView('admin.appointments.index', compact('appointments','doctors','services'), 'Lịch hẹn');
 	}
 
 	public function update(Request $request, int $id)

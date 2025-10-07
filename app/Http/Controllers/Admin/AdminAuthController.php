@@ -1,20 +1,20 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseAdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class AdminAuthController extends Controller
+class AdminAuthController extends BaseAdminController
 {
     public function showLogin()
     {
         if(Auth::check()){
             return redirect()->route('admin.home');
         }
-        return view('admin.auth.login');
+        return $this->renderView('admin.auth.login', [], 'Đăng nhập');
     }
 
     public function login(Request $request)

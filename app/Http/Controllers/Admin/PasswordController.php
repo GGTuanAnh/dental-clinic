@@ -1,17 +1,17 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseAdminController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Support\AuditLogger;
 
-class PasswordController extends Controller
+class PasswordController extends BaseAdminController
 {
     public function edit()
     {
-        return view('admin.auth.password');
+        return $this->renderView('admin.auth.password', [], 'Đổi mật khẩu');
     }
 
     public function update(Request $request)

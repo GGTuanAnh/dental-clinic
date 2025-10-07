@@ -1,0 +1,361 @@
+/* SIMPLIFIED ADMIN THEME - FIX UI/UX ISSUES */
+:root {
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 60px;
+  --admin-bg: #0f172a;
+  --sidebar-bg: #1e293b;
+  --text-light: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --border-color: rgba(148, 163, 184, 0.2);
+  --transition: all 0.2s ease;
+}
+
+/* Reset and base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--admin-bg);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* Main layout */
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  overflow-y: auto;
+}
+
+.admin-sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+/* Brand */
+.admin-sidebar .brand {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.admin-sidebar.collapsed .brand span {
+  display: none;
+}
+
+/* User card */
+.admin-user-card {
+  margin: 1rem;
+  padding: 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-user-card .avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.admin-user-card .meta .name {
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+
+.admin-user-card .meta .role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-user-card .edit {
+  margin-left: auto;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.admin-user-card .edit:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.admin-sidebar.collapsed .admin-user-card {
+  flex-direction: column;
+  text-align: center;
+}
+
+.admin-sidebar.collapsed .admin-user-card .meta,
+.admin-sidebar.collapsed .admin-user-card .edit {
+  display: none;
+}
+
+/* Navigation */
+.admin-nav {
+  flex: 1;
+  padding: 0 1rem 1rem;
+}
+
+.nav-section {
+  margin-bottom: 1.5rem;
+}
+
+.nav-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  padding: 0 0.75rem;
+}
+
+.admin-sidebar.collapsed .nav-label {
+  display: none;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.admin-nav a:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--text-light);
+}
+
+.admin-nav a.active {
+  background: var(--accent);
+  color: white;
+}
+
+.admin-nav a i {
+  width: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.admin-sidebar.collapsed .admin-nav a span {
+  display: none;
+}
+
+.admin-sidebar.collapsed .admin-nav a {
+  justify-content: center;
+  padding: 0.75rem 0.5rem;
+}
+
+/* Footer */
+.admin-sidebar-footer {
+  margin: 0 1rem 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.admin-sidebar.collapsed .admin-sidebar-footer {
+  display: none;
+}
+
+/* Content area */
+.admin-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.admin-sidebar.collapsed + .admin-content {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
+/* Topbar */
+.admin-topbar {
+  background: var(--sidebar-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sidebar-toggle:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.page-heading h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.page-heading p {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quick-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quick-link {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.quick-link:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.topbar-actions .btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.topbar-actions .btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Main content */
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+  background: var(--admin-bg);
+  transition: opacity 0.15s ease;
+}
+
+/* HTMX transitions */
+.htmx-swapping .admin-main {
+  opacity: 0.7;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .admin-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .admin-content {
+    margin-left: 0;
+  }
+  
+  .quick-links {
+    display: none;
+  }
+  
+  .page-heading p {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-sidebar {
+    width: 100vw;
+  }
+  
+  .admin-main {
+    padding: 1rem;
+  }
+  
+  .admin-topbar {
+    padding: 1rem;
+  }
+}

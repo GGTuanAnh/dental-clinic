@@ -21,7 +21,7 @@ Route::prefix($adminPrefix)->name('admin.')->group(function(){
 
 // Protected admin routes
 Route::prefix($adminPrefix)
-    ->middleware('auth')
+    ->middleware(['auth','force.password.reset'])
     ->as('admin.')
     ->group(function(){
     Route::get('/', [DashboardController::class,'index'])->name('home');

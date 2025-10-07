@@ -27,6 +27,8 @@ class PasswordController extends Controller
         }
 
         $user->password = Hash::make($request->input('password'));
+        $user->force_password_reset = false;
+        $user->password_changed_at = now();
         $user->save();
         AuditLogger::log('password.changed', $user, []);
         Auth::logoutOtherDevices($request->input('password'));

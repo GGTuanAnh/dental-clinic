@@ -103,6 +103,15 @@
         @hasSection('breadcrumbs')
           <div class="mb-2">@yield('breadcrumbs')</div>
         @endif
+        @if(session('warning'))
+          <div class="alert alert-warning d-flex align-items-center gap-2" role="alert">
+            <i class="bi bi-exclamation-triangle"></i>
+            <span>{{ session('warning') }}</span>
+          </div>
+        @endif
+        @if(session('status'))
+          <div class="alert alert-success" role="status">{{ session('status') }}</div>
+        @endif
         @yield('content')
       </main>
       <footer class="footer-admin">&copy; {{ date('Y') }} Nha Khoa An Việt • Admin</footer>

@@ -26,6 +26,12 @@ class AdminAuthController extends Controller
 
         if(Auth::attempt($credentials, $request->boolean('remember'))){
             $request->session()->regenerate();
+            $user = Auth::user();
+            if ($user && $user->force_password_reset) {
+                return redirect()->route('admin.password.edit')
+                    ->with('warning', 'Đây là lần đăng nhập đầu tiên. Vui lòng đổi mật khẩu mặc định.');
+            }
+
             return redirect()->intended(route('admin.home'));
         }
         return back()->withErrors(['email'=>'Thông tin đăng nhập không đúng'])->withInput();

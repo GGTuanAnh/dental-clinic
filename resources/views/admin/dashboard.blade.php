@@ -54,7 +54,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h6 class="mb-3 text-muted">Lịch hẹn 7 ngày gần nhất</h6>
-                <canvas id="appointmentsChart" data-chart-url="{{ route('admin.home') }}?chart=1" height="140"></canvas>
+                <canvas id="appointmentsChart" data-chart-url="{{ route('admin.home', ['doctorDashboard' => 1]) }}" height="140"></canvas>
                 </div>
             </div>
         </div>
@@ -67,10 +67,11 @@
     fetch(chartUrl,{headers:{'Accept':'application/json'}})
      .then(r=>r.json())
      .then(data=>{
-            if(!data.labels) return;
+            const lineData = data && data.line ? data.line : null;
+            if(!lineData || !Array.isArray(lineData.labels) || !Array.isArray(lineData.counts)) return;
             new Chart(document.getElementById('appointmentsChart').getContext('2d'),{
                 type:'line',
-                data:{labels:data.labels,datasets:[{label:'Số lịch hẹn',data:data.counts, tension:.3, borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.15)',fill:true}]},
+                data:{labels:lineData.labels,datasets:[{label:'Số lịch hẹn',data:lineData.counts, tension:.3, borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.15)',fill:true}]},
                 options:{
                     plugins:{legend:{display:false}},
                     scales:{y:{beginAtZero:true, ticks:{precision:0}}}

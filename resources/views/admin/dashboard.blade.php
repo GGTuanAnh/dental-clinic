@@ -8,14 +8,6 @@
 
 @section('content')
 <div class="row g-4">
-    <!-- Header với thông tin doctor -->
-    <div class="col-12">
-        <div class="alert alert-info">
-            <h5 class="mb-1">👨‍⚕️ {{ $stats['doctor_name'] }}</h5>
-            <p class="mb-0">Bác sĩ điều hành phòng khám - {{ $stats['appointments_assigned'] }} lịch hẹn được quản lý</p>
-        </div>
-    </div>
-    
     <div class="col-md-3">
         <div class="card shadow-sm h-100">
             <div class="card-body">
@@ -35,7 +27,7 @@
     <div class="col-md-3">
         <div class="card shadow-sm h-100">
             <div class="card-body">
-                <h6 class="text-muted">Total Patients</h6>
+                <h6 class="text-muted">Patients</h6>
                 <div class="display-6 fw-bold">{{ $stats['patients_total'] }}</div>
             </div>
         </div>
@@ -43,7 +35,15 @@
     <div class="col-md-3">
         <div class="card shadow-sm h-100">
             <div class="card-body">
-                <h6 class="text-muted">Available Services</h6>
+                <h6 class="text-muted">Doctors</h6>
+                <div class="display-6 fw-bold">{{ $stats['doctors_total'] }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm h-100 mt-4">
+            <div class="card-body">
+                <h6 class="text-muted">Services</h6>
                 <div class="display-6 fw-bold">{{ $stats['services_total'] }}</div>
             </div>
         </div>

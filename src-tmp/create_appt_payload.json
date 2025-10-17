@@ -1,0 +1,7 @@
+{
+  "name": "Test API Patient",
+  "phone": "0912345678",
+  "service_id": 1,
+  "appointment_at": "2025-10-20 10:00:00",
+  "note": "Created by API test"
+}

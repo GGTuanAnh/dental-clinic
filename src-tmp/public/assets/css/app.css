@@ -1,0 +1,130 @@
+:root{--primary:#0ea5e9;--primary-dark:#0284c7;--accent:#22c55e;--dark:#0f172a;--muted:#64748b;--bg:#f8fafc}
+body{font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:var(--bg);color:#0b1220}
+.navbar{box-shadow:0 1px 10px rgba(15,23,42,.06)}
+.hero{background:linear-gradient(135deg,#e0f2fe 0%,#f0f9ff 100%);padding:80px 0}
+.hero h1{font-weight:800;color:var(--dark);letter-spacing:-.02em}
+.hero p{color:var(--muted);font-size:1.125rem}
+.btn-primary{background:var(--primary);border-color:var(--primary)}
+.btn-primary:hover{background:var(--primary-dark);border-color:var(--primary-dark)}
+.section-title{font-weight:700;color:var(--dark)}
+.card{border:0;box-shadow:0 10px 20px rgba(2,8,23,.06);border-radius:14px}
+.icon-circle{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#e0f2fe;color:#0369a1}
+.feature p{color:var(--muted)}
+.footer{background:#0b1220;color:#cbd5e1}
+.footer a{color:#e2e8f0;text-decoration:none}
+.footer a:hover{color:white}
+.alert-success{border:0;box-shadow:0 10px 20px rgba(34,197,94,.15)}
+.form-label{font-weight:600}
+
+/* Hover & interaction enhancements */
+/* Links underline animation */
+.navbar .nav-link{position:relative;transition:color .2s ease}
+.navbar .nav-link::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:100%;background:var(--primary);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.navbar .nav-link:hover{color:var(--primary)}
+.navbar .nav-link:hover::after{transform:scaleX(1)}
+
+/* Brand subtle hover */
+.navbar .navbar-brand{transition:transform .2s ease,color .2s ease}
+.navbar .navbar-brand:hover{transform:translateY(-1px)}
+
+/* Card hover lift + image zoom */
+.card{overflow:hidden;transition:transform .25s ease, box-shadow .25s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(2,8,23,.12)}
+.card .card-img-top{transition:transform .5s ease}
+.card:hover .card-img-top{transform:scale(1.05)}
+
+/* Icon circle hover */
+.icon-circle{transition:transform .25s ease, background .25s ease, color .25s ease}
+.icon-circle:hover{transform:translateY(-2px) scale(1.05);background:#dbeafe;color:#075985}
+
+/* Buttons */
+.btn{transition:transform .15s ease, box-shadow .15s ease, background-color .2s ease, border-color .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(2,8,23,.12)}
+.btn:active{transform:translateY(0)}
+.btn-outline-primary:hover{background:rgba(14,165,233,.08)}
+
+/* CTA block hover */
+.bg-white.rounded-4.shadow-sm{transition:transform .25s ease, box-shadow .25s ease}
+.bg-white.rounded-4.shadow-sm:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(2,8,23,.12)}
+
+/* Form focus visuals */
+.form-control:focus, .form-select:focus{border-color:var(--primary);box-shadow:0 0 0 .2rem rgba(14,165,233,.15)}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+
+/* Trustbar (social proof under hero) */
+.trustbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.trust-item{display:flex;align-items:center;gap:8px;color:var(--muted);font-weight:600}
+.trust-item .stars{color:#f59e0b}
+.trust-item .dot{width:6px;height:6px;border-radius:50%;background:#cbd5e1;display:inline-block}
+
+/* Floating Quick Action Menu */
+.floating-menu{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;padding:10px;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(2,8,23,.15);z-index:1030;-webkit-backdrop-filter:saturate(1.2) blur(0px);backdrop-filter:saturate(1.2) blur(0px)}
+.floating-right{right:16px}
+.floating-left{left:16px}
+.fm-btn{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,background-color .2s ease;will-change:transform;box-shadow:0 6px 16px rgba(2,8,23,.12);outline:none;overflow:hidden}
+.fm-btn:hover{transform:translateY(-2px) scale(1.06);box-shadow:0 10px 22px rgba(2,8,23,.18)}
+.fm-btn:active,.fm-btn.pressed{transform:scale(.98)}
+.fm-btn svg{width:22px;height:22px;display:block;fill:currentColor}
+.fm-btn i{font-size:20px;line-height:1}
+.fm-book{background:#0ea5e9} /* Brand primary. Adjust if your brand differs */
+.fm-facebook{background:#1877F2}
+.fm-zalo{background:#0068FF}
+.fm-btn:focus-visible{box-shadow:0 0 0 3px rgba(14,165,233,.35),0 6px 16px rgba(2,8,23,.12)}
+@media (max-width:576px){.floating-right{right:12px}.floating-left{left:12px}.floating-menu{bottom:calc(90px + env(safe-area-inset-bottom,0px));gap:10px;padding:8px;border-radius:14px}.fm-btn{width:56px;height:56px}.fm-btn svg{width:24px;height:24px}}
+
+/* Before/After comparison component */
+.ba__wrap{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(2,8,23,.08)}
+.ba__img{display:block;width:100%;height:auto}
+.ba__after{position:absolute;inset:0;clip-path:inset(0 0 0 50%)}
+.ba__divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(2,8,23,.5);box-shadow:0 0 0 1px rgba(255,255,255,.6) inset}
+.ba__divider::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#ffffff;border:2px solid rgba(2,8,23,.5);box-shadow:0 6px 14px rgba(2,8,23,.18)}
+.ba__range{position:absolute;inset:0;appearance:none;background:transparent;cursor:ew-resize}
+.ba__range::-webkit-slider-thumb{appearance:none;width:28px;height:28px;border-radius:50%;background:transparent;border:0}
+.ba__range::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:transparent;border:0}
+
+/* Mobile sticky action bar */
+.action-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:1031;background:#ffffff;border-radius:16px;box-shadow:0 16px 40px rgba(2,8,23,.18);padding:8px 10px;display:none;gap:10px;justify-content:space-between;align-items:center;backdrop-filter:saturate(1.2) blur(8px)}
+.ab-item{flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:#0b1220;font-size:.8rem;font-weight:600;padding:6px 4px;border-radius:12px;transition:transform .15s ease, background-color .2s ease}
+.ab-item i{font-size:18px;color:var(--primary)}
+.ab-item:hover{transform:translateY(-2px);background:#f1f5f9}
+@supports(padding: max(0px)){.action-bar{padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}}
+@media (max-width:576px){.action-bar{display:flex}.floating-menu{display:none !important}}
+
+/* Tooltip spacing override when used with Bootstrap tooltips */
+.floating-menu [data-bs-toggle="tooltip"]{--bs-tooltip-margin:8px}
+
+/* Online badge */
+.fm-btn{position:relative}
+.fm-badge{position:absolute;top:6px;right:6px;width:10px;height:10px;border-radius:50%;background:#94a3b8;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.fm-badge.online{background:#22c55e}
+
+/* Platform logo images */
+.fm-btn img{display:block;width:22px;height:22px}
+
+/* Entrance animation */
+.floating-menu.fm-animate{animation:fm-slide-in .4s ease both}
+@keyframes fm-slide-in{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* Ripple hover/click effect */
+.fm-btn::after{content:"";position:absolute;top:50%;left:50%;width:10px;height:10px;background:rgba(255,255,255,.35);border-radius:50%;transform:translate(-50%,-50%) scale(0);opacity:0;pointer-events:none}
+.fm-btn:hover::after{animation:fm-ripple .6s ease-out}
+.fm-btn:active::after{animation:fm-ripple .45s ease-out}
+@keyframes fm-ripple{from{transform:translate(-50%,-50%) scale(0);opacity:.5}to{transform:translate(-50%,-50%) scale(6);opacity:0}}
+
+/* Online badge pulse */
+.fm-badge.online{animation:fm-pulse 1.8s ease-out infinite}
+@keyframes fm-pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+
+/* Periodic attention pulse for booking button */
+.fm-book.fm-attn{animation:fm-attn 1.2s ease-out 1}
+@keyframes fm-attn{0%{box-shadow:0 0 0 0 rgba(14,165,233,.45),0 6px 16px rgba(2,8,23,.12)}100%{box-shadow:0 0 0 18px rgba(14,165,233,0),0 6px 16px rgba(2,8,23,.12)}}
+
+/* Desktop sticky CTA bar */
+.desktop-cta{position:fixed;left:0;right:0;bottom:20px;z-index:1029;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s ease, transform .25s ease}
+.desktop-cta .container{background:#ffffff;border-radius:16px;box-shadow:0 18px 40px rgba(2,8,23,.2);padding:12px 16px}
+.desktop-cta.show{opacity:1;transform:translateY(0);pointer-events:auto}
+@media (max-width:768px){.desktop-cta{display:none}}

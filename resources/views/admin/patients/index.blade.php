@@ -11,13 +11,23 @@
   <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
     <h2 class="h4 mb-0 fw-semibold">Bệnh nhân</h2>
     <div class="d-flex gap-2">
-      <a href="{{ route('admin.appointments.index') }}" class="btn btn-sm btn-outline-light"><i class="bi bi-calendar"></i> Lịch hẹn</a>
+      <a href="{{ route('admin.appointments.index') }}" 
+         hx-get="{{ route('admin.appointments.index') }}?partial=1"
+         hx-target="#adminMainContent"
+         hx-push-url="{{ route('admin.appointments.index') }}"
+         hx-swap="innerHTML transition:true"
+         class="btn btn-sm btn-outline-light"><i class="bi bi-calendar"></i> Lịch hẹn</a>
     </div>
   </div>
 
   <div class="card shadow-sm">
     <div class="card-body">
-      <form method="get" class="row g-2 align-items-end">
+      <form method="get" 
+            hx-get="{{ route('admin.patients.index') }}"
+            hx-target="#adminMainContent"
+            hx-push-url="true"
+            class="row g-2 align-items-end">
+        <input type="hidden" name="partial" value="1">
         <div class="col-md-4">
           <label class="form-label">Tìm kiếm</label>
           <input type="text" name="q" class="form-control" value="{{ request('q') }}" placeholder="Tên hoặc SĐT">
@@ -50,7 +60,12 @@
           <td>{{ $p->dob }}</td>
           <td class="text-truncate" style="max-width:280px">{{ $p->address }}</td>
           <td class="text-end">
-            <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.patients.show',$p->id) }}"><i class="bi bi-person"></i></a>
+            <a class="btn btn-sm btn-outline-primary" 
+               href="{{ route('admin.patients.show',$p->id) }}"
+               hx-get="{{ route('admin.patients.show',$p->id) }}?partial=1"
+               hx-target="#adminMainContent"
+               hx-push-url="{{ route('admin.patients.show',$p->id) }}"
+               hx-swap="innerHTML transition:true"><i class="bi bi-person"></i></a>
           </td>
         </tr>
         @empty

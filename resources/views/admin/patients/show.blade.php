@@ -15,8 +15,18 @@
       <div class="text-muted">{{ $patient->name }} · {{ $patient->phone }}</div>
     </div>
     <div class="d-flex gap-2">
-  <a href="{{ route('admin.patients.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Danh sách</a>
-  <a href="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}" class="btn btn-primary"><i class="bi bi-calendar"></i> Lịch hẹn</a>
+  <a href="{{ route('admin.patients.index') }}" 
+     hx-get="{{ route('admin.patients.index') }}?partial=1"
+     hx-target="#adminMainContent"
+     hx-push-url="{{ route('admin.patients.index') }}"
+     hx-swap="innerHTML transition:true"
+     class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Danh sách</a>
+  <a href="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}" 
+     hx-get="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}?partial=1"
+     hx-target="#adminMainContent"
+     hx-push-url="{{ route('admin.appointments.index', ['q' => $patient->phone]) }}"
+     hx-swap="innerHTML transition:true"
+     class="btn btn-primary"><i class="bi bi-calendar"></i> Lịch hẹn</a>
     </div>
   </div>
 

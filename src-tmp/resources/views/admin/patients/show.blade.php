@@ -30,6 +30,12 @@
     </div>
   </div>
 
+  <div class="mb-3 d-flex justify-content-end">
+    @can('update', $patient)
+      <a href="{{ route('admin.patients.edit', $patient->id) }}" class="btn btn-outline-primary me-2"><i class="bi bi-pencil"></i> Chỉnh sửa</a>
+    @endcan
+  </div>
+
   @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
   @endif
@@ -53,6 +59,43 @@
     <div class="col-lg-8">
       <!-- Notes section removed as PatientNote model doesn't exist -->
       
+      <div class="card shadow-sm mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Lịch tái khám sắp tới</h5>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="table-light">
+                <tr>
+                  <th>Ngày</th>
+                  <th>Dịch vụ</th>
+                  <th>Bác sĩ</th>
+                  <th>Trạng thái</th>
+                  <th>Tiền</th>
+                  <th>TT</th>
+                </tr>
+              </thead>
+              <tbody>
+                @php
+                  $upcoming = $patient->appointments->where('appointment_at', '>=', now())->sortBy('appointment_at');
+                @endphp
+                @forelse($upcoming as $a)
+                  <tr>
+                    <td class="text-nowrap">{{ $a->appointment_at?->format('d/m/Y H:i') }}</td>
+                    <td>{{ $a->service->name }}</td>
+                    <td>{{ $a->doctor?->name }}</td>
+                    <td>{{ $a->status }}</td>
+                    <td>{{ number_format($a->total_amount ?? 0,0,',','.') }} đ</td>
+                    <td>@if($a->paid_at)<span class="badge bg-success">Đã TT</span>@else<span class="badge bg-warning text-dark">Chưa</span>@endif</td>
+                  </tr>
+                @empty
+                  <tr><td colspan="6" class="text-center text-muted">Chưa có lịch tái khám</td></tr>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <div class="card shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Lịch sử khám</h5>
@@ -69,7 +112,10 @@
                 </tr>
               </thead>
               <tbody>
-                @forelse($patient->appointments as $a)
+                @php
+                  $past = $patient->appointments->where('appointment_at', '<', now())->sortByDesc('appointment_at');
+                @endphp
+                @forelse($past as $a)
                   <tr>
                     <td class="text-nowrap">{{ $a->appointment_at?->format('d/m/Y H:i') }}</td>
                     <td>{{ $a->service->name }}</td>
@@ -79,7 +125,7 @@
                     <td>@if($a->paid_at)<span class="badge bg-success">Đã TT</span>@else<span class="badge bg-warning text-dark">Chưa</span>@endif</td>
                   </tr>
                 @empty
-                  <tr><td colspan="6" class="text-center text-muted">Chưa có lịch hẹn</td></tr>
+                  <tr><td colspan="6" class="text-center text-muted">Chưa có lịch khám</td></tr>
                 @endforelse
               </tbody>
             </table>

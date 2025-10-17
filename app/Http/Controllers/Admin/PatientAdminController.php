@@ -32,6 +32,32 @@ class PatientAdminController extends BaseAdminController
         return $this->renderView('admin.patients.show', compact('patient'), 'Chi tiết bệnh nhân: ' . $patient->name);
     }
 
+    public function edit(int $id)
+    {
+        $patient = Patient::findOrFail($id);
+        $this->authorize('update', $patient);
+
+        return $this->renderView('admin.patients.edit', compact('patient'), 'Chỉnh sửa bệnh nhân: ' . $patient->name);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $patient = Patient::findOrFail($id);
+        $this->authorize('update', $patient);
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:30',
+            'gender' => 'nullable|string|max:20',
+            'dob' => 'nullable|date',
+            'address' => 'nullable|string|max:1000',
+        ]);
+
+        $patient->update($data);
+
+        return redirect()->route('admin.patients.show', $patient->id)->with('success', 'Thông tin bệnh nhân đã được cập nhật.');
+    }
+
     // Patient notes feature removed as PatientNote model doesn't exist
     // If needed in future, create PatientNote model and migration first
 }

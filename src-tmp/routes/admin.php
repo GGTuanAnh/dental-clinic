@@ -40,8 +40,11 @@ Route::prefix($adminPrefix)
         Route::post('/appointments/{id}', [AppointmentAdminController::class, 'update'])->name('appointments.update');
 
         // Patients
-        Route::get('/patients', [PatientAdminController::class, 'index'])->name('patients.index');
-        Route::get('/patients/{id}', [PatientAdminController::class, 'show'])->name('patients.show');
+    Route::get('/patients', [PatientAdminController::class, 'index'])->name('patients.index');
+    Route::get('/patients/{id}', [PatientAdminController::class, 'show'])->name('patients.show');
+    // Edit patient
+    Route::get('/patients/{id}/edit', [PatientAdminController::class, 'edit'])->name('patients.edit');
+    Route::patch('/patients/{id}', [PatientAdminController::class, 'update'])->name('patients.update');
         // addNote route removed as PatientNote model doesn't exist
 
         // Reports

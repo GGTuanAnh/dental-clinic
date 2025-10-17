@@ -41,31 +41,8 @@
     </div>
 
     <div class="col-lg-8">
-      <div class="card shadow-sm mb-3">
-        <div class="card-body">
-          <h5 class="card-title d-flex align-items-center justify-content-between">
-            <span>Ghi chú</span>
-          </h5>
-          <form method="post" action="{{ route('admin.patients.addNote', $patient->id) }}" class="mb-3">
-            @csrf
-            <div class="input-group">
-              <textarea name="note" class="form-control" rows="2" placeholder="Thêm ghi chú cho bệnh nhân"></textarea>
-              <button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Thêm</button>
-            </div>
-          </form>
-          <ul class="list-group list-group-flush">
-            @forelse($patient->notes as $n)
-              <li class="list-group-item">
-                <div class="small text-muted">#{{ $n->id }} · {{ $n->created_at }}</div>
-                <div>{{ $n->note }}</div>
-              </li>
-            @empty
-              <li class="list-group-item text-muted">Chưa có ghi chú</li>
-            @endforelse
-          </ul>
-        </div>
-      </div>
-
+      <!-- Notes section removed as PatientNote model doesn't exist -->
+      
       <div class="card shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Lịch sử khám</h5>
